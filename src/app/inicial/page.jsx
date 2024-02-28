@@ -27,7 +27,7 @@ const Inicial = () => {
                                     Inscreva-Se
                                 </a>
                             </Link>
-                            <Link href={submeter} legacyBehavior>
+                            <Link href='/submeter' legacyBehavior>
                                 <a className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                     Submeter Artigo
                                 </a>
