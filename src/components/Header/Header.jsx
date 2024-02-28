@@ -1,22 +1,21 @@
-import Link from "next/link"
+import Link from "next/link";
+import styles from "./Header.module.css";
 
 const Header = () => {
     return (
-        <header className="bg-gray-800 text-white p-4">
-            <div className="container mx-auto">
-                <div className="flex items-center justify-between">
-                    <Link href="/" className="text-2xl font-bold">
-                        Climate Change Event
+        <header className={styles.header}>
+            <div className={styles.container}>
+                <Link href="/" className={styles.logo}>
+                    Climate Change Event
+                </Link>
+                <nav className={styles.nav}>
+                    <Link href="/about" className={styles.link}>
+                        Sobre
                     </Link>
-                    <nav>
-                        <Link href="/about" className="ml-4 text-gray-300 hover:text-white">
-                            Sobre
-                        </Link>
-                    </nav>
-                </div>
+                </nav>
             </div>
         </header>
-    )
-}
+    );
+};
 
-export { Header }
+export { Header };
