@@ -8,7 +8,7 @@ const Header = () => {
         <header className={styles.header}>
             <div className={styles.container}>
                 <Link href="/" className={styles.link}>
-                    SisEC
+                    SisIEC
                 </Link>
                 <nav className={styles.nav}>
                     <Link href="/administrativo" className={styles.adm}>
