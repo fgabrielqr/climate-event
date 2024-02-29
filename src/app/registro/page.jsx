@@ -71,7 +71,7 @@ const Registro = () => {
                             type="submit"
                             className={styles.button}
                         >
-                            Register
+                            Cadastrar
                         </button>
                     </form>
                 </div>

@@ -12,9 +12,19 @@
   justify-content: space-between;
 }
 
-.logo {
+.link {
   font-size: 2rem;
   font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.adm {
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
 }
 
 .nav {
