@@ -1,43 +1,46 @@
+'use client'
+import { api } from "@/services/api";
 import { createContext, useEffect, useState } from "react";
-import { api } from "../services";
+
 
 export const AppContext = createContext({});
 
 export const AppContextProvider = (props) => {
     const { children } = props;
-    const [criador, setCriador] = useState('Felipe Gabriel')
-    const [tarefas, setTarefas] = useState([]);
+    const [registros, setRegistros] = useState([]);
     const [loadingCriar, setLoadingCriar] = useState(false);
     const [loadingEditar, setLoadingEditar] = useState(null);
     const [loadingRemover, setLoadingRemover] = useState(null);
     const [loadingCarregar, setLoadingCarregar] = useState(false);
 
-    const carregarTarefas = async () => {
-        setLoadingCarregar(true);
+    const carregarRegistro = async () => {
+        // setLoadingCarregar(true);
 
-        const { data = [] } = await api.get('/tarefas');
-        setTarefas([
+        const { data = [] } = await api.get('/registros');
+        setRegistros([
             ...data,
         ])
         setTimeout(() => {
             // Após o atraso, você pode realizar sua lógica de criação aqui
 
             // Por exemplo, redefinir o estado do loading
-            setLoadingCarregar(false);
+            // setLoadingCarregar(false);
         }, 1000);
-
+        console.log({ data })
     }
 
-    const adicionarTatefa = async (nomeTarefa) => {
-        setLoadingCriar(true);
+    const adicionarRegistro = async (nomeRegistro, emailRegistro, afiliacaoRegistro) => {
+        // setLoadingCriar(true);
 
-        const { data: tarefa } = await api.post('/tarefas', {
-            nome: nomeTarefa,
+        const { data: registro } = await api.post('/registros', {
+            nome: nomeRegistro,
+            email: emailRegistro,
+            afiliacao: afiliacaoRegistro,
         })
-        setTarefas(estadoAtual => {
+        setRegistros(estadoAtual => {
             return [
                 ...estadoAtual,
-                tarefa,
+                registro,
             ]
         });
 
@@ -45,11 +48,11 @@ export const AppContextProvider = (props) => {
             // Após o atraso, você pode realizar sua lógica de criação aqui
 
             // Por exemplo, redefinir o estado do loading
-            setLoadingCriar(false);
+            // setLoadingCriar(false);
         }, 1000);
     }
 
-    const removerTarefa = async (idTarefa) => {
+    const removerRegistro = async (idTarefa) => {
         setLoadingRemover(idTarefa);
 
         await api.delete(`tarefas/${idTarefa}`);
@@ -69,11 +72,11 @@ export const AppContextProvider = (props) => {
 
     };
 
-    const editarTarefa = async (idTarefa, nomeTarefa) => {
+    const editarRegistro = async (idTarefa, nomeRegistro) => {
         setLoadingEditar(idTarefa);
 
-        const { data: tarefaAtualizada } = await api.put(`tarefas/${idTarefa}`, {
-            nome: nomeTarefa,
+        const { data: tarefaAtualizada } = await api.put(`registros/${idTarefa}`, {
+            nome: nomeRegistro,
         })
         setTarefas(estadoAtual => {
             const tarefasAtualizadas = estadoAtual.map(tarefa => {
@@ -97,16 +100,15 @@ export const AppContextProvider = (props) => {
     }
 
     useEffect(() => {
-        carregarTarefas();
+        carregarRegistro();
     }, [])
 
     return (
         <AppContext.Provider value={{
-            criador,
-            tarefas,
-            adicionarTatefa,
-            removerTarefa,
-            editarTarefa,
+            registros,
+            adicionarRegistro,
+            removerRegistro,
+            editarRegistro,
             loadingCarregar,
             loadingCriar,
             loadingEditar,

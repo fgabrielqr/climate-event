@@ -1,12 +1,16 @@
 {
-  "tarefas": [
+  "registros": [
     {
       "id": "b9fb",
-      "nome": "02"
+      "nome": "Lucas Pereira",
+      "email": "b9fb@gmail.com",
+      "afiliacao": "UFRN"
     },
     {
       "id": "29d7",
-      "nome": "03"
+      "nome": "José Alves",
+      "email": "29d7@gmail.com",
+      "afiliacao": "IFRN"
     }
   ]
 }

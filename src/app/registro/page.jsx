@@ -1,29 +1,55 @@
-// import { useState } from "react";
-// import axios from "axios";
-// import { useRouter } from "next/navigation";
-// import Header from "../components/Header";
-// import Footer from "../components/Footer";
-import React from 'react';
+'use client'
+
+import React, { useState } from 'react';
 import styles from './Registro.module.css';
 import { Header } from '@/components/Header/Header';
 import { Footer } from '@/components/Footer/Footer';
+import { useAppContext } from '@/hooks/useAppContext';
 
 const Registro = () => {
-    // const router = useRouter();
-    // const [name, setName] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [affiliation, setAffiliation] = useState("");
+    const { adicionarRegistro, loadingCriar } = useAppContext();
+    const [nomeRegistro, setNomeRegistro] = useState();
+    const [emailRegistro, setEmailRegistro] = useState();
+    const [afiliacaoRegistro, setAfiliacaoRegistro] = useState();
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
+    const onChangeRegistro = (event) => {
+        const { name, value } = event.currentTarget;
 
-    //     try {
-    //         await axios.post("/api/register", { name, email, affiliation });
-    //         router.push("/");
-    //     } catch (error) {
-    //         console.error("Error during registration", error);
+        // Use o name para determinar qual estado atualizar
+        if (name === 'nome') {
+            setNomeRegistro(value);
+        } else if (name === 'email') {
+            setEmailRegistro(value);
+        } else if (name === 'afiliacao') {
+            setAfiliacaoRegistro(value);
+        }
+    };
+
+
+    // const submeterForm = () => {
+    //     event.preventDefault();
+
+    //     if (!nomeRegistro && !emailRegistro && !afiliacaoRegistro) {
+    //         return;
     //     }
-    // };
+    //     adicionarRegistro(nomeRegistro, emailRegistro, afiliacaoRegistro)
+
+    //     setNomeRegistro('')
+    //     setEmailRegistro('')
+    //     setAfiliacaoRegistro('')
+    // }
+
+    const submeterForm = (event) => {
+        event.preventDefault();
+
+        if (!nomeRegistro && !emailRegistro && !afiliacaoRegistro) {
+            return;
+        }
+        adicionarRegistro(nomeRegistro);
+
+        setNomeRegistro('');
+
+    }
 
     return (
         <>
@@ -40,31 +66,34 @@ const Registro = () => {
                 <div className={styles.containerForm}>
                     <h1 className={styles.title}>Inscreva-Se</h1>
                     <form
-                        // onSubmit={handleSubmit}
+                        onSubmit={submeterForm}
                         className={styles.formContainer}
                     >
                         <input
                             type="text"
-                            name="name"
-                            id="name"
+                            name='nome'
                             className={styles.inputField}
                             placeholder="Nome"
+                            value={nomeRegistro}
+                            onChange={onChangeRegistro}
                             required
                         />
                         <input
                             type="email"
-                            name="email"
-                            id="email"
+                            name='email'
                             className={styles.inputField}
                             placeholder="E-mail"
+                            value={emailRegistro}
+                            onChange={onChangeRegistro}
                             required
                         />
                         <input
                             type="text"
-                            name="affiliation"
-                            id="affiliation"
+                            name='afiliação'
                             className={styles.inputField}
                             placeholder="Afiliação"
+                            value={afiliacaoRegistro}
+                            onChange={onChangeRegistro}
                             required
                         />
                         <button
