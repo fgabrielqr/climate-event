@@ -37,7 +37,10 @@ const Submeter = () => {
                 </div>
                 <div className={styles.containerForm}>
                     <h1 className={styles.title}>Submeter Artigo</h1>
-                    <form className={styles.formContainer}>
+                    <form
+                        // onSubmit={handleSubmit}
+                        className={styles.formContainer}
+                    >
                         <div className={styles.input}>
                             <input
                                 type="text"
@@ -46,6 +49,8 @@ const Submeter = () => {
                                 className={styles.inputField}
                                 placeholder="Title"
                                 required
+                            // value={title}
+                            // onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
                         <div className={styles.input}>
@@ -56,6 +61,8 @@ const Submeter = () => {
                                 rows="2"
                                 required
                                 className={styles.textArea}
+                            // value={abstract}
+                            // onChange={(e) => setAbstract(e.target.value)}
                             ></textarea>
                         </div>
                         <div className={styles.input}>
@@ -65,6 +72,7 @@ const Submeter = () => {
                                 id="file"
                                 required
                                 className={styles.fileInput}
+                            // onChange={(e) => setFile(e.target.files[0])}
                             />
                         </div>
                         <button type="submit" className={styles.button}>
