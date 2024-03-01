@@ -1,9 +1,29 @@
-import React from "react";
+'use client'
 import styles from "./Submeter.module.css"; // Import the CSS module
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
+import { useState } from "react";
 
 const Submeter = () => {
+    const [title, setTitle] = useState();
+    const [abstract, setAbstract] = useState();
+    const [file, setFile] = useState();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("abstract", abstract);
+        formData.append("file", file);
+
+        try {
+            await axios.post("/api/submission", formData);
+            router.push("/");
+        } catch (error) {
+            console.error("Error during submission", error);
+        }
+    };
     return (
         <div>
             <Header />

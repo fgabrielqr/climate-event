@@ -25,27 +25,13 @@ const Registro = () => {
         }
     };
 
-
-    // const submeterForm = () => {
-    //     event.preventDefault();
-
-    //     if (!nomeRegistro && !emailRegistro && !afiliacaoRegistro) {
-    //         return;
-    //     }
-    //     adicionarRegistro(nomeRegistro, emailRegistro, afiliacaoRegistro)
-
-    //     setNomeRegistro('')
-    //     setEmailRegistro('')
-    //     setAfiliacaoRegistro('')
-    // }
-
     const submeterForm = (event) => {
         event.preventDefault();
 
         if (!nomeRegistro && !emailRegistro && !afiliacaoRegistro) {
             return;
         }
-        adicionarRegistro(nomeRegistro);
+        adicionarRegistro(nomeRegistro, emailRegistro, afiliacaoRegistro);
 
         setNomeRegistro('');
 
@@ -89,7 +75,7 @@ const Registro = () => {
                         />
                         <input
                             type="text"
-                            name='afiliação'
+                            name='afiliacao'
                             className={styles.inputField}
                             placeholder="Afiliação"
                             value={afiliacaoRegistro}

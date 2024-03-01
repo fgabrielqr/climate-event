@@ -1,8 +1,12 @@
+'use client'
 import { Footer } from "@/components/Footer/Footer";
 import { Header } from "@/components/Header/Header";
 import styles from "./Admin.module.css"; // Import the CSS module
+import { useAppContext } from "@/hooks/useAppContext";
+import { useEffect } from "react";
 
 const Admin = () => {
+    const { registro, loadingCarregar } = useAppContext();
     return (
         <>
             <Header />
@@ -17,6 +21,7 @@ const Admin = () => {
                         <div className={styles.card}>
                             <h1 className={styles.title}>Admin Dashboard</h1>
                             <div className={styles.cardTitle}>Registro de Usuários:</div>
+
                             <div className={styles.cardTitle}>Artigos Submetidos:</div>
                         </div>
                     </div>
