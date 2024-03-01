@@ -7,9 +7,11 @@ export const AppContext = createContext({});
 export const AppContextProvider = (props) => {
     const { children } = props;
     const [registros, setRegistros] = useState([]);
+    const [submeter, setSubmeter] = useState([]);
     const [loadingCriar, setLoadingCriar] = useState(false);
     const [loadingCarregar, setLoadingCarregar] = useState(false);
     const [numeroDePessoasCadastradas, setNumeroDePessoasCadastradas] = useState(0);
+    const [numeroDeArtigos, setNumeroDeArtigos] = useState(0);
 
     const carregarRegistro = async () => {
         setLoadingCarregar(true);
@@ -19,12 +21,37 @@ export const AppContextProvider = (props) => {
 
             // Conta o número de registros
             const numeroDePessoasCadastradas = data.length;
+            const numeroDeArtigos = data.length;
 
             // Atualiza o estado dos registros
             setRegistros([...data]);
 
             // Atualiza o estado do número de pessoas cadastradas
             setNumeroDePessoasCadastradas(numeroDePessoasCadastradas);
+
+            setTimeout(() => {
+                setLoadingCarregar(false);
+            }, 1000);
+        } catch (error) {
+            console.error('Erro ao carregar registros:', error);
+            setLoadingCarregar(false);
+        }
+    };
+
+    const carregarArtigos = async () => {
+        setLoadingCarregar(true);
+        try {
+            const response = await api.get('/submeter');
+            const data = response.data || [];
+
+            // Conta o número de registros
+            const numeroDeArtigos = data.length;
+
+            // Atualiza o estado dos registros
+            setSubmeter([...data]);
+
+            // Atualiza o estado do número de pessoas cadastradas
+            setNumeroDeArtigos(numeroDeArtigos);
 
             setTimeout(() => {
                 setLoadingCarregar(false);
@@ -91,10 +118,12 @@ export const AppContextProvider = (props) => {
 
     useEffect(() => {
         carregarRegistro();
+        carregarArtigos();
     }, [])
 
     return (
         <AppContext.Provider value={{
+            numeroDeArtigos,
             numeroDePessoasCadastradas,
             adicionarRegistro,
             adicionarArtigo,

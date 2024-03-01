@@ -8,7 +8,7 @@ import { Header } from "@/components/Header/Header";
 import styles from "./Admin.module.css";
 
 const Admin = () => {
-    const { numeroDePessoasCadastradas } = useAppContext();
+    const { numeroDePessoasCadastradas, numeroDeArtigos } = useAppContext();
 
     return (
         <>
@@ -31,6 +31,7 @@ const Admin = () => {
                             </div>
                             <div className={styles.cardTitle}>
                                 Artigos Submetidos:
+                                {numeroDeArtigos}
                             </div>
                         </div>
                     </div>
