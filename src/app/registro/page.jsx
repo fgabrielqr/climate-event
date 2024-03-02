@@ -96,7 +96,7 @@ const Registro = () => {
                     {loadingCriar && (
                         <div className={styles.feedbackContainer}>
                             <p className={styles.feedbackText}>
-                                Usuário Cadastrado!
+                                Excelente seu cadastrado foi efetuado!
                             </p>
                         </div>
                     )}

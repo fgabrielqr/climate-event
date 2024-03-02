@@ -100,7 +100,7 @@ const Submeter = () => {
                     {loadingCriar && (
                         <div className={styles.feedbackContainer}>
                             <p className={styles.feedbackText}>
-                                Artigo Submetido!
+                                Parabéns seu artigo foi submetido!
                             </p>
                         </div>
                     )}
