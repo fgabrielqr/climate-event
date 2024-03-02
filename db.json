@@ -63,15 +63,32 @@
       "nome": "FELIPE GABRIEL QUEIROZ REGO",
       "email": "felipe007trompa@gmail.com",
       "afiliacao": "UFERSA"
+    },
+    {
+      "id": "c2bc",
+      "nome": "A volta dos que não foram",
+      "email": "A volta dos que não foramA volta dos que não foramA volta dos que não foramA volta dos que não foramA volta dos que não foram",
+      "afiliacao": "C:\\fakepath\\CNH Digital.pdf"
     }
   ],
-
   "submeter": [
     {
       "id": "9791",
       "titulo": "A volta dos que não foram",
-      "tipo": "TCC",
+      "resumo": "TCC",
       "arquivo": "Nome"
+    },
+    {
+      "id": "b97f",
+      "titulo": "Teste",
+      "resumo": "sdfgasfgasfga",
+      "arquivo": "C:\\fakepath\\currículo (3).pdf"
+    },
+    {
+      "id": "4b7f",
+      "titulo": "OS ZÉ",
+      "resumo": "asgrf asrgfr",
+      "arquivo": "C:\\fakepath\\currículo (2).pdf"
     }
   ]
 }

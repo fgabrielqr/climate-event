@@ -21,7 +21,6 @@ export const AppContextProvider = (props) => {
 
             // Conta o número de registros
             const numeroDePessoasCadastradas = data.length;
-            const numeroDeArtigos = data.length;
 
             // Atualiza o estado dos registros
             setRegistros([...data]);
@@ -75,6 +74,9 @@ export const AppContextProvider = (props) => {
                 registro,
             ]
         });
+
+        carregarRegistro();
+
         setTimeout(() => {
             setLoadingCriar(false);
         }, 2000);
@@ -82,38 +84,23 @@ export const AppContextProvider = (props) => {
 
     const adicionarArtigo = async (tituloArtigo, resumoArtigo, arquivo) => {
         setLoadingCriar(true);
+        const { data: submeter } = await api.post('/submeter', {
+            titulo: tituloArtigo,
+            resumo: resumoArtigo,
+            arquivo: arquivo,
+        })
+        setRegistros(estadoAtual => {
+            return [
+                ...estadoAtual,
+                submeter,
+            ]
+        });
 
-        // Use FormData para permitir o envio de arquivos
-        const formData = new FormData();
-        formData.append('tituloArtigo', tituloArtigo);
-        formData.append('resumoArtigo', resumoArtigo);
+        carregarArtigos();
 
-        // Se houver um arquivo, adicione-o ao FormData
-        if (arquivo) {
-            formData.append('arquivo', arquivo);
-        }
-
-        try {
-            const { data: registro } = await api.post('/registros', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            setRegistros(estadoAtual => {
-                return [
-                    ...estadoAtual,
-                    registro,
-                ];
-            });
-
-            setTimeout(() => {
-                setLoadingCriar(false);
-            }, 1000);
-        } catch (error) {
-            console.error('Erro ao adicionar registro:', error);
+        setTimeout(() => {
             setLoadingCriar(false);
-        }
+        }, 2000);
     };
 
     useEffect(() => {

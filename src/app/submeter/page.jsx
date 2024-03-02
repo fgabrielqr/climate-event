@@ -9,26 +9,39 @@ import { Footer } from "@/components/Footer/Footer";
 import styles from "./Submeter.module.css";
 
 const Submeter = () => {
-    const { adicionarRegistro, loadingCriar } = useAppContext();
-    const [title, setTitle] = useState();
-    const [abstract, setAbstract] = useState();
-    const [file, setFile] = useState();
+    const { adicionarArtigo, loadingCriar } = useAppContext();
+    const [tituloArtigo, setTituloArtigo] = useState();
+    const [resumoArtigo, setResumoArtigo] = useState();
+    const [arquivo, setArquivo] = useState();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onChangeSubmeter = (event) => {
+        const { name, value } = event.currentTarget;
 
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("abstract", abstract);
-        formData.append("file", file);
-
-        try {
-            await axios.post("/api/submission", formData);
-            router.push("/");
-        } catch (error) {
-            console.error("Error during submission", error);
+        // Name para determinar qual estado atualizar
+        if (name === 'titulo') {
+            setTituloArtigo(value);
+        } else if (name === 'resumo') {
+            setResumoArtigo(value);
+        } else if (name === 'arquivo') {
+            setArquivo(value);
         }
     };
+
+    const submeterForm = (event) => {
+        event.preventDefault();
+
+        if (!tituloArtigo && !resumoArtigo && !arquivo) {
+            return;
+        }
+        // Lógica para chamar a função adicionarRegistro com os dados do formulário
+        adicionarArtigo(tituloArtigo, resumoArtigo, arquivo);
+
+        // Limpar os campos do formulário após o cadastro
+        setTituloArtigo('');
+        setResumoArtigo('');
+        setArquivo('');
+    }
+
     return (
         <div>
             <Header />
@@ -43,41 +56,41 @@ const Submeter = () => {
                 <div className={styles.containerForm}>
                     <h1 className={styles.title}>Submeter Artigo</h1>
                     <form
-                        // onSubmit={handleSubmit}
+                        onSubmit={submeterForm}
                         className={styles.formContainer}
                     >
                         <div className={styles.input}>
                             <input
                                 type="text"
-                                name="title"
-                                id="title"
+                                name="titulo"
+                                id="titulo"
                                 className={styles.inputField}
-                                placeholder="Title"
+                                placeholder="Titulo"
                                 required
-                            // value={title}
-                            // onChange={(e) => setTitle(e.target.value)}
+                                value={tituloArtigo}
+                                onChange={onChangeSubmeter}
                             />
                         </div>
                         <div className={styles.input}>
                             <textarea
-                                name="abstract"
-                                id="abstract"
+                                name="resumo"
+                                id="resumo"
                                 placeholder="Resumo do Artigo"
                                 rows="2"
                                 required
                                 className={styles.textArea}
-                            // value={abstract}
-                            // onChange={(e) => setAbstract(e.target.value)}
+                                value={resumoArtigo}
+                                onChange={onChangeSubmeter}
                             ></textarea>
                         </div>
                         <div className={styles.input}>
                             <input
                                 type="file"
-                                name="file"
-                                id="file"
+                                name="arquivo"
+                                id="arquivo"
                                 required
                                 className={styles.fileInput}
-                            // onChange={(e) => setFile(e.target.files[0])}
+                                onChange={onChangeSubmeter}
                             />
                         </div>
                         <button type="submit" className={styles.button}>
