@@ -1,10 +1,12 @@
 'use client'
 
 import React, { useState } from 'react';
-import styles from './Registro.module.css';
+import { useAppContext } from '@/hooks/useAppContext';
+
 import { Header } from '@/components/Header/Header';
 import { Footer } from '@/components/Footer/Footer';
-import { useAppContext } from '@/hooks/useAppContext';
+
+import styles from './Registro.module.css';
 
 const Registro = () => {
     const { adicionarRegistro, loadingCriar } = useAppContext();
@@ -15,7 +17,7 @@ const Registro = () => {
     const onChangeRegistro = (event) => {
         const { name, value } = event.currentTarget;
 
-        // Use o name para determinar qual estado atualizar
+        // Name para determinar qual estado atualizar
         if (name === 'nome') {
             setNomeRegistro(value);
         } else if (name === 'email') {
@@ -31,16 +33,18 @@ const Registro = () => {
         if (!nomeRegistro && !emailRegistro && !afiliacaoRegistro) {
             return;
         }
+        // Lógica para chamar a função adicionarRegistro com os dados do formulário
         adicionarRegistro(nomeRegistro, emailRegistro, afiliacaoRegistro);
 
+        // Limpar os campos do formulário após o cadastro
         setNomeRegistro('');
-
+        setEmailRegistro('');
+        setAfiliacaoRegistro('');
     }
 
     return (
         <>
             <Header />
-
             <div className={styles.container}>
                 <div className={styles.imageContainer}>
                     <img
@@ -86,9 +90,16 @@ const Registro = () => {
                             type="submit"
                             className={styles.button}
                         >
-                            Cadastrar
+                            {loadingCriar ? 'Cadastrando...' : 'Cadastrar'}
                         </button>
                     </form>
+                    {loadingCriar && (
+                        <div className={styles.feedbackContainer}>
+                            <p className={styles.feedbackText}>
+                                Usuário Cadastrado!
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
             <Footer />

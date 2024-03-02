@@ -26,6 +26,7 @@
   flex-direction: column;
   align-self: center;
   margin: 0 auto;
+  align-items: center;
 }
 
 .formContainer {
@@ -90,4 +91,21 @@
 
 .button:hover {
   background-color: #2980b9;
+}
+
+.feedbackContainer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #d0e9c6;
+  border: 1px solid #2d4126;
+  border-radius: 4px;
+  width: 20%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.feedbackText {
+  color: #3c763d; /* Bootstrap success alert text color */
+  margin: 0;
 }

@@ -1,10 +1,15 @@
 'use client'
-import styles from "./Submeter.module.css"; // Import the CSS module
+
+import { useState } from "react";
+import { useAppContext } from "@/hooks/useAppContext";
+
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
-import { useState } from "react";
+
+import styles from "./Submeter.module.css";
 
 const Submeter = () => {
+    const { adicionarRegistro, loadingCriar } = useAppContext();
     const [title, setTitle] = useState();
     const [abstract, setAbstract] = useState();
     const [file, setFile] = useState();
@@ -76,9 +81,16 @@ const Submeter = () => {
                             />
                         </div>
                         <button type="submit" className={styles.button}>
-                            Submeter
+                            {loadingCriar ? 'Submetendo...' : 'Submeter'}
                         </button>
                     </form>
+                    {loadingCriar && (
+                        <div className={styles.feedbackContainer}>
+                            <p className={styles.feedbackText}>
+                                Artigo Submetido!
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
             <Footer />
