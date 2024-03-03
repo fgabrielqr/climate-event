@@ -20,15 +20,11 @@ const Inicial = () => {
                         Junte-se a nós em um evento esclarecedor sobre as últimas descobertas na pesquisa sobre mudanças climáticas.
                     </p>
                     <div className={styles.buttonContainer}>
-                        <Link href="/registro" legacyBehavior>
-                            <a className={`${styles.link} ${styles.blue}`}>
-                                Inscreva-Se
-                            </a>
+                        <Link href="/registro" className={`${styles.link} ${styles.blue}`}>
+                            Inscreva-Se
                         </Link>
-                        <Link href="/submeter" legacyBehavior>
-                            <a className={`${styles.link} ${styles.gray}`}>
-                                Submeter Artigo
-                            </a>
+                        <Link href="/submeter" className={`${styles.link} ${styles.gray}`}>
+                            Submeter Artigo
                         </Link>
                     </div>
                 </div>

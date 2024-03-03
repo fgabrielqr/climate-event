@@ -5,6 +5,9 @@ import { useAppContext } from "@/hooks/useAppContext";
 
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
+import { Feedback } from "@/components/Feedback/Feedback";
+import { InputForm } from "@/components/InputForm/InputForm";
+import { BotaoForm } from "@/components/BotaoFrom/BotaoForm";
 
 import styles from "./Submeter.module.css";
 
@@ -59,50 +62,40 @@ const Submeter = () => {
                         onSubmit={submeterForm}
                         className={styles.formContainer}
                     >
-                        <div className={styles.input}>
-                            <input
-                                type="text"
-                                name="titulo"
-                                id="titulo"
-                                className={styles.inputField}
-                                placeholder="Titulo"
-                                required
-                                value={tituloArtigo}
-                                onChange={onChangeSubmeter}
-                            />
-                        </div>
-                        <div className={styles.input}>
-                            <textarea
-                                name="resumo"
-                                id="resumo"
-                                placeholder="Resumo do Artigo"
-                                rows="2"
-                                required
-                                className={styles.textArea}
-                                value={resumoArtigo}
-                                onChange={onChangeSubmeter}
-                            ></textarea>
-                        </div>
-                        <div className={styles.input}>
-                            <input
-                                type="file"
-                                name="arquivo"
-                                id="arquivo"
-                                required
-                                className={styles.fileInput}
-                                onChange={onChangeSubmeter}
-                            />
-                        </div>
-                        <button type="submit" className={styles.button}>
-                            {loadingCriar ? 'Submetendo...' : 'Submeter'}
-                        </button>
+                        <InputForm
+                            name={"titulo"}
+                            id={"titulo"}
+                            placeholder={"Titulo"}
+                            required
+                            onChange={onChangeSubmeter}
+                            value={tituloArtigo}
+                        />
+                        <textarea
+                            name="resumo"
+                            id="resumo"
+                            placeholder="Resumo do Artigo"
+                            rows="2"
+                            required
+                            className={styles.textArea}
+                            value={resumoArtigo}
+                            onChange={onChangeSubmeter}
+                        />
+                        <input
+                            type="file"
+                            name="arquivo"
+                            id="arquivo"
+                            required
+                            className={styles.fileInput}
+                            value={arquivo}
+                            onChange={onChangeSubmeter}
+                        />
+                        <BotaoForm
+                            loading={loadingCriar}
+                            label={"Submeter"}
+                        />
                     </form>
                     {loadingCriar && (
-                        <div className={styles.feedbackContainer}>
-                            <p className={styles.feedbackText}>
-                                Parabéns seu artigo foi submetido!
-                            </p>
-                        </div>
+                        <Feedback />
                     )}
                 </div>
             </div>
