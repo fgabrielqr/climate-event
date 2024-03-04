@@ -27,10 +27,6 @@
   cursor: pointer;
 }
 
-.nav {
-  display: none;
-}
-
 .bg-blue {
   background-color: #0070f3;
   color: #fff;

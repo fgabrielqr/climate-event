@@ -61,8 +61,12 @@
     height: 50vh;
   }
 
+  .containerForm {
+    margin-block: 2rem;
+  }
+
   .formContainer {
-    width: 100%;
+    width: 80%;
     max-width: 100%;
   }
 }
