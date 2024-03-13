@@ -43,6 +43,14 @@
   margin: 0 auto;
 }
 
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #3498db;
+}
+
 @media (max-width: 640px) {
   .container {
     flex-direction: column;
@@ -53,59 +61,12 @@
     height: 50vh;
   }
 
+  .containerForm {
+    margin-block: 2rem;
+  }
+
   .formContainer {
-    width: 100%;
+    width: 80%;
     max-width: 100%;
   }
-}
-
-.title {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #3498db;
-}
-
-.inputField {
-  width: 100%;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  outline: none;
-  box-sizing: border-box;
-}
-
-.button {
-  width: 100%;
-  padding: 1rem;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #2980b9;
-}
-
-.feedbackContainer {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #d0e9c6;
-  border: 1px solid #2d4126;
-  border-radius: 4px;
-  width: 20%;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.feedbackText {
-  color: #3c763d; /* Bootstrap success alert text color */
-  margin: 0;
 }

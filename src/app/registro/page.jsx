@@ -5,6 +5,9 @@ import { useAppContext } from '@/hooks/useAppContext';
 
 import { Header } from '@/components/Header/Header';
 import { Footer } from '@/components/Footer/Footer';
+import { Feedback } from '@/components/Feedback/Feedback';
+import { InputForm } from '@/components/InputForm/InputForm';
+import { BotaoForm } from '@/components/BotaoFrom/BotaoForm';
 
 import styles from './Registro.module.css';
 
@@ -59,46 +62,37 @@ const Registro = () => {
                         onSubmit={submeterForm}
                         className={styles.formContainer}
                     >
-                        <input
-                            type="text"
-                            name='nome'
-                            className={styles.inputField}
-                            placeholder="Nome"
+                        <InputForm
+                            name={"nome"}
+                            id={"nome"}
+                            placeholder={"Nome"}
+                            required
+                            onChange={onChangeRegistro}
                             value={nomeRegistro}
-                            onChange={onChangeRegistro}
-                            required
                         />
-                        <input
-                            type="email"
-                            name='email'
-                            className={styles.inputField}
-                            placeholder="E-mail"
+                        <InputForm
+                            name={"email"}
+                            id={"email"}
+                            placeholder={"E-mail"}
+                            required
+                            onChange={onChangeRegistro}
                             value={emailRegistro}
-                            onChange={onChangeRegistro}
-                            required
                         />
-                        <input
-                            type="text"
-                            name='afiliacao'
-                            className={styles.inputField}
-                            placeholder="Afiliação"
+                        <InputForm
+                            name={"afiliacao"}
+                            id={"afiliacao"}
+                            placeholder={"Afiliacao"}
+                            required
+                            onChange={onChangeRegistro}
                             value={afiliacaoRegistro}
-                            onChange={onChangeRegistro}
-                            required
                         />
-                        <button
-                            type="submit"
-                            className={styles.button}
-                        >
-                            {loadingCriar ? 'Cadastrando...' : 'Cadastrar'}
-                        </button>
+                        <BotaoForm
+                            loading={loadingCriar}
+                            label="Cadastrar"
+                        />
                     </form>
                     {loadingCriar && (
-                        <div className={styles.feedbackContainer}>
-                            <p className={styles.feedbackText}>
-                                Usuário Cadastrado!
-                            </p>
-                        </div>
+                        <Feedback />
                     )}
                 </div>
             </div>

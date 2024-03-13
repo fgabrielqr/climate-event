@@ -5,30 +5,46 @@ import { useAppContext } from "@/hooks/useAppContext";
 
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
+import { Feedback } from "@/components/Feedback/Feedback";
+import { InputForm } from "@/components/InputForm/InputForm";
+import { BotaoForm } from "@/components/BotaoFrom/BotaoForm";
 
 import styles from "./Submeter.module.css";
 
 const Submeter = () => {
-    const { adicionarRegistro, loadingCriar } = useAppContext();
-    const [title, setTitle] = useState();
-    const [abstract, setAbstract] = useState();
-    const [file, setFile] = useState();
+    const { adicionarArtigo, loadingCriar } = useAppContext();
+    const [tituloArtigo, setTituloArtigo] = useState();
+    const [resumoArtigo, setResumoArtigo] = useState();
+    const [arquivo, setArquivo] = useState();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onChangeSubmeter = (event) => {
+        const { name, value } = event.currentTarget;
 
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("abstract", abstract);
-        formData.append("file", file);
-
-        try {
-            await axios.post("/api/submission", formData);
-            router.push("/");
-        } catch (error) {
-            console.error("Error during submission", error);
+        // Name para determinar qual estado atualizar
+        if (name === 'titulo') {
+            setTituloArtigo(value);
+        } else if (name === 'resumo') {
+            setResumoArtigo(value);
+        } else if (name === 'arquivo') {
+            setArquivo(value);
         }
     };
+
+    const submeterForm = (event) => {
+        event.preventDefault();
+
+        if (!tituloArtigo && !resumoArtigo && !arquivo) {
+            return;
+        }
+        // Lógica para chamar a função adicionarRegistro com os dados do formulário
+        adicionarArtigo(tituloArtigo, resumoArtigo, arquivo);
+
+        // Limpar os campos do formulário após o cadastro
+        setTituloArtigo('');
+        setResumoArtigo('');
+        setArquivo('');
+    }
+
     return (
         <div>
             <Header />
@@ -42,46 +58,44 @@ const Submeter = () => {
                 </div>
                 <div className={styles.containerForm}>
                     <h1 className={styles.title}>Submeter Artigo</h1>
-                    <form className={styles.formContainer}>
-                        <div className={styles.input}>
-                            <input
-                                type="text"
-                                name="title"
-                                id="title"
-                                className={styles.inputField}
-                                placeholder="Title"
-                                required
-                            />
-                        </div>
-                        <div className={styles.input}>
-                            <textarea
-                                name="abstract"
-                                id="abstract"
-                                placeholder="Resumo do Artigo"
-                                rows="2"
-                                required
-                                className={styles.textArea}
-                            ></textarea>
-                        </div>
-                        <div className={styles.input}>
-                            <input
-                                type="file"
-                                name="file"
-                                id="file"
-                                required
-                                className={styles.fileInput}
-                            />
-                        </div>
-                        <button type="submit" className={styles.button}>
-                            {loadingCriar ? 'Submetendo...' : 'Submeter'}
-                        </button>
+                    <form
+                        onSubmit={submeterForm}
+                        className={styles.formContainer}
+                    >
+                        <InputForm
+                            name={"titulo"}
+                            id={"titulo"}
+                            placeholder={"Titulo"}
+                            required
+                            onChange={onChangeSubmeter}
+                            value={tituloArtigo}
+                        />
+                        <textarea
+                            name="resumo"
+                            id="resumo"
+                            placeholder="Resumo do Artigo"
+                            rows="2"
+                            required
+                            className={styles.textArea}
+                            value={resumoArtigo}
+                            onChange={onChangeSubmeter}
+                        />
+                        <input
+                            type="file"
+                            name="arquivo"
+                            id="arquivo"
+                            required
+                            className={styles.fileInput}
+                            value={arquivo}
+                            onChange={onChangeSubmeter}
+                        />
+                        <BotaoForm
+                            loading={loadingCriar}
+                            label={"Submeter"}
+                        />
                     </form>
                     {loadingCriar && (
-                        <div className={styles.feedbackContainer}>
-                            <p className={styles.feedbackText}>
-                                Artigo Submetido!
-                            </p>
-                        </div>
+                        <Feedback />
                     )}
                 </div>
             </div>
